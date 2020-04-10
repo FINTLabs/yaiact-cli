@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
-const utils = require('./lib/subscription');
-const fs = require('fs');
 const clear = require('clear');
 const chalk = require('chalk');
 const figlet = require('figlet');
+const utils = require('./lib/utils');
+const arm = require('./lib/arm');
+
+const yargs = require("yargs");
+
+
 
 clear();
 
@@ -17,23 +21,49 @@ console.log(
     '\n'
 );
 
-utils.getSubscriptions().forEach((subscription) => {
-    console.log(chalk.blue('Subscription (' + subscription + ')'));
-    utils.getResourceGroups(subscription).forEach((rg) => {
-        console.log(chalk.bold.green('  ✔️'), 'Generating deployment for ' + chalk.bold.yellow(rg))
-        const template = require('./templates/arm.template.json')
-
-        template.parameters = utils.getParameters(subscription, rg);
-        template.variables = utils.getVariables(subscription, rg);
-
-        utils.getResources(subscription, rg)
-            .then((resources) => {
-                template.resources = resources;
-                if (!fs.existsSync('./output')) {
-                    fs.mkdirSync('./output');
-                }
-                fs.writeFileSync(`./output/${rg}-deploy.json`, JSON.stringify(template, null, 4));
-
-            });
-    });
-});
+yargs.scriptName('yaiact')
+    .usage('$0 <cmd> [args]')
+    .command('clean', 'Clean build directory', (yargs) => {
+        yargs.options('d', {
+            alias: 'directory',
+            type: 'string',
+            default: 'output',
+            describe: 'name of the build directory'
+        })
+    }, (argv) => {
+        utils.cleanBuildDirectory(argv.d);
+    })
+    .command('arm', 'Generate ARM template', (yargs) => {
+        yargs.options('d', {
+            alias: 'directory',
+            type: 'string',
+            default: 'output',
+            describe: 'name of the build directory'
+        })
+    }, (argv) => {
+        arm.generateArm(argv.d);
+    })
+    .command('update variables', 'Update variables', (yargs) => {}, (argv) => {
+        arm.updateVariables();
+    })
+    .command('new rg [name] [subscription]', 'Generate skeleton for resource group', (yargs) => {
+        yargs
+            .positional('name', {
+                type: 'string',
+                require: true,
+                describe: 'name of resource group'
+            })
+            .positional('subscription', {
+                type: 'string',
+                require: true,
+                describe: 'name of subscription'
+            })
+    }, (argv) => {
+        if (!argv.name || !argv.subscription) {
+            yargs.showHelp();
+            process.exit(0);
+        }
+        arm.createResourceGroupSkeleton(argv.subscription, argv.name);
+    })
+    .help()
+    .argv;
