@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const utils = require('./lib/utils');
 const arm = require('./lib/arm');
+const project = require('./lib/project');
 
 const yargs = require("yargs");
 
@@ -23,6 +24,16 @@ console.log(
 
 yargs.scriptName('yaiact')
     .usage('$0 <cmd> [args]')
+    .command('init [name]', 'Create a new project', (yargs) => {
+        yargs
+        .positional('name', {
+            type: 'string',
+            require: true,
+            describe: 'name of project'
+        })
+    }, (argv) => {
+       project.init(argv.name); 
+    })
     .command('clean', 'Clean build directory', (yargs) => {
         yargs.options('d', {
             alias: 'directory',

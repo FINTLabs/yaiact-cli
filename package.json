@@ -1,7 +1,7 @@
 {
   "name": "yaiact-cli",
   "version": "1.0.0",
-  "description": "Infrastructure as Code Azure",
+  "description": "Infrastructure as Code tool for Azure",
   "main": "index.js",
   "license": "MIT",
   "private": false,
@@ -14,7 +14,7 @@
     "yaiact": "./index.js"
   },
   "scripts": {
-    "build": "node index.js"
+    "yaiact": "node index.js"
   },
   "devDependencies": {},
   "dependencies": {
@@ -25,9 +25,14 @@
     "command-exists": "^1.2.8",
     "figlet": "^1.3.0",
     "fs-extra": "^9.0.0",
+    "gitconfig": "^2.0.8",
     "jsonschema": "^1.2.6",
+    "nodegit": "^0.26.5",
+    "npm-programmatic": "^0.0.12",
+    "ora": "^4.0.3",
     "recursive-readdir": "^2.2.2",
     "replace-in-file": "^5.0.2",
+    "yaml": "^1.8.3",
     "yargs": "^15.3.1"
   }
 }
