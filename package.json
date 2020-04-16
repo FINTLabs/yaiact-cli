@@ -1,6 +1,6 @@
 {
   "name": "yaiact-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Infrastructure as Code tool for Azure",
   "main": "index.js",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "author": {
     "name": "Frode Sjovatsen",
     "email": "frode.sjovatsen@gmail.com",
-    "url": "https://github.com/fsjovatsen"
+    "url": "https://github.com/fsjovatsen/yaiact-cli"
   },
   "bin": {
     "yaiact": "./index.js"
