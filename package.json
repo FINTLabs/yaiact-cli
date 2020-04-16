@@ -1,5 +1,5 @@
 {
-  "name": "yaiact-cli",
+  "name": "@fintlabs/yaiact-cli",
   "version": "1.0.1",
   "description": "Infrastructure as Code tool for Azure",
   "main": "index.js",
