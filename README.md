@@ -12,7 +12,7 @@ files into on ARM template build time.
 * You need to be logged in to the tenants your gone create deployments for.
 
 ## Installing `yaiact` globally
-`npm install yaiact-cli@latest -g`
+`npm install @fintlabs/yaiact-cli@latest -g`
     
 ## Setting up a new `yaiact` project
 `npx @fintlabs/yaiact-cli init my-project-name`
@@ -24,7 +24,7 @@ This will setup a `node` project with the necessary dependencies.
 `yarn new-rg <resource group name> <subscription name> <location>`
 
 ### With npm
-`npm new-rg <resource group name> <subscription name> <location>`
+`npm run new-rg <resource group name> <subscription name> <location>`
 
 ### With `yaiact-cli`
 `yaiact new rg <resource group name> <subscription name> <location>`
@@ -36,7 +36,7 @@ This will create a new folder in the `data` folder. This is where you create you
 `yarn build`
 
 ### With npm
-`npm build`
+`npm run build`
 
 ### With `yaiact-cli`
 `yaiact arm`
