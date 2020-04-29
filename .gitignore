@@ -3,3 +3,5 @@ output/
 data/
 test-project/
 .DS_Store
+.idea/
+
