@@ -29,7 +29,7 @@
     "jsonschema": "^1.2.6",
     "nodegit": "^0.26.5",
     "npm-programmatic": "^0.0.12",
-    "ora": "^4.0.3",
+    "ora": "^4.1.1",
     "recursive-readdir": "^2.2.2",
     "replace-in-file": "^5.0.2",
     "yaml": "^1.8.3",
